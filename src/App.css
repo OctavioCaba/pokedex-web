@@ -32,7 +32,39 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+.navbar {
+  padding: 0;
+}
+
+.nav-link {
+  border: 1px solid transparent;
+  padding: 10px 20px;
+}
+
+.nav-link:hover {
+  border: 1px solid #e3350d;
+  background-color: #e3350d;
+  color: #fff !important;
+}
+
+.footer {
+  background-color: #f8f9fa;
+  padding-top: 10px;
+  padding-bottom: 30px;
+  text-align: center;
+}
+
+.footer p {
+  padding: 0;
+  margin: 0;
+}
+
+.footer a {
+  text-decoration: none;
 }
