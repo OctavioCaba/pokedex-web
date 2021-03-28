@@ -2,9 +2,10 @@ import pokemonData from '../data/pokemonData';
 import { useState, useEffect } from 'react';
 import typesTranslation from '../helpers';
 
-export const PokemonCard = ({ pokemon }) => {
+export const PokemonTableItem = ({ pokemon }) => {
   const [pokemonType, setPokemonType] = useState([]);
   const [pokemonImg, setPokemonImg] = useState([]);
+  const [pokemonDexId, setPokemonDexId] = useState([]);
 
   useEffect(() => {
     if (pokemon.name === 'nosepass') {
@@ -12,52 +13,61 @@ export const PokemonCard = ({ pokemon }) => {
         const typesTranslated = res.types.map(type => typesTranslation(type.type.name));
         setPokemonType(typesTranslated);
         setPokemonImg(res.sprites.front_default);
+        setPokemonDexId(res.id);
       });
     } else if (pokemon.name === 'shedinja') {
       pokemonData.getPokemonData('pokemon-form/292/').then(res => {
         const typesTranslated = res.types.map(type => typesTranslation(type.type.name));
         setPokemonType(typesTranslated);
         setPokemonImg(res.sprites.front_default);
+        setPokemonDexId(res.id);
       });
     } else if (pokemon.name === 'suicune') {
       pokemonData.getPokemonData('pokemon-form/245/').then(res => {
         const typesTranslated = res.types.map(type => typesTranslation(type.type.name));
         setPokemonType(typesTranslated);
         setPokemonImg(res.sprites.front_default);
+        setPokemonDexId(res.id);
       });
     } else {
       pokemonData.getPokemonData('pokemon/' + pokemon.name).then(res => {
         const typesTranslated = res.types.map(type => typesTranslation(type.type.name));
         setPokemonType(typesTranslated);
-        setPokemonImg(res.sprites.other['official-artwork'].front_default);
+        setPokemonImg(res.sprites.front_default);
+        setPokemonDexId(res.id);
       });
     }
   }, [pokemon.name]);
 
   return (
-    <div className="col-lg-3 col-md-4 col-sm-6 pokemon-card">
-      <div className="card">
-        <div className="card-body">
-          <a href={`http://localhost:3000/pokemon/${pokemon.name}`}>
-            <div className="image-container">
-              <img src={pokemonImg} alt="pokemon"/>
-            </div>
+    <>
+      <tr>
+        <th scope="row">{pokemonDexId}</th>
+        <td className="pokemon-sprite">
+          <img src={pokemonImg} alt="pokemon-sprite"/>
+        </td>
+        <td style={{textTransform:'capitalize'}}>
+          <a href={`http://localhost:3000/pokemon/${pokemon.name}`}className="pokemon-name-link">
+            {
+              pokemon.name !== 'urshifu-single-strike'
+              ? pokemon.name
+              : 'urshifu'
+            }
           </a>
-          <a href={`http://localhost:3000/pokemon/${pokemon.name}`}><h5 className="card-title">{pokemon.name}</h5></a>
-          <p className="card-text pokemon-types">
-            {
-              pokemonType[0]
-              ? <a href={`http://localhost:3000/tipo/${pokemonType[0]}`}><span className={`type ${pokemonType[0]}`}>{pokemonType[0]}</span></a>
-              : ''
-            }
-            {
-              pokemonType[1]
-              ? <a href={`http://localhost:3000/tipo/${pokemonType[1]}`}><span className={`type ${pokemonType[1]}`}>{pokemonType[1]}</span></a>
-              : ''
-            }
-          </p>
-        </div>
-      </div>
-    </div>
+        </td>
+        <td className="pokemon-types">
+          {
+            pokemonType[0]
+            ? <a href={`http://localhost:3000/tipo/${pokemonType[0]}`}><span className={`type ${pokemonType[0]}`}>{pokemonType[0]}</span></a>
+            : ''
+          }
+          {
+            pokemonType[1]
+            ? <a href={`http://localhost:3000/tipo/${pokemonType[1]}`}><span className={`type ${pokemonType[1]}`}>{pokemonType[1]}</span></a>
+            : ''
+          }
+        </td>
+      </tr>
+    </>
   )
 }

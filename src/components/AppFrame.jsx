@@ -4,10 +4,10 @@ export const AppFrame = ({ children }) => {
   return (
     <div>
       <Navbar />
-      <div className="container text-center">
+      <div className="text-center">
         { children }
       </div>
-      <footer className="footer">
+      <footer className="footer sticky-bottom">
         <p>Página diseñada y desarrollada por <a href="https://github.com/octaviocaba" className="App-link" target="_blank" rel="noreferrer">Octavio Caba</a></p>
         <small>&copy;2021</small>
       </footer>
