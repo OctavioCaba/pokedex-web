@@ -1,6 +1,7 @@
 import pokemonData from '../data/pokemonData';
 import { useState, useEffect } from 'react';
 import typesTranslation from '../helpers';
+import { PokemonImage } from './PokemonImage';
 
 export const PokemonTableItem = ({ pokemon }) => {
   const [pokemonType, setPokemonType] = useState([]);
@@ -43,10 +44,10 @@ export const PokemonTableItem = ({ pokemon }) => {
     <>
       <tr>
         <th scope="row">{pokemonDexId}</th>
-        <td className="pokemon-sprite">
-          <img src={pokemonImg} alt="pokemon-sprite"/>
+        <td>
+          <PokemonImage pokemonImg={pokemonImg} imgSize='75px' />
         </td>
-        <td style={{textTransform:'capitalize'}}>
+        <td className="text-capitalize">
           <a href={`http://localhost:3000/pokemon/${pokemon.name}`}className="pokemon-name-link">
             {
               pokemon.name !== 'urshifu-single-strike'

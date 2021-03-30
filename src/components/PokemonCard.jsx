@@ -1,6 +1,7 @@
 import pokemonData from '../data/pokemonData';
 import { useState, useEffect } from 'react';
 import typesTranslation from '../helpers';
+import { PokemonImage } from './PokemonImage';
 
 export const PokemonCard = ({ pokemon }) => {
   const [pokemonType, setPokemonType] = useState([]);
@@ -39,9 +40,7 @@ export const PokemonCard = ({ pokemon }) => {
       <div className="card">
         <div className="card-body">
           <a href={`http://localhost:3000/pokemon/${pokemon.name}`}>
-            <div className="image-container">
-              <img src={pokemonImg} alt="pokemon"/>
-            </div>
+            <PokemonImage pokemonImg={pokemonImg} imgSize='90px' />
           </a>
           <a href={`http://localhost:3000/pokemon/${pokemon.name}`}><h5 className="card-title">{pokemon.name}</h5></a>
           <p className="card-text pokemon-types">

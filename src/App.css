@@ -61,16 +61,6 @@
   margin-bottom: 20px;
 }
 
-.image-container img {
-  width: 90px;
-  height: 90px;
-}
-
-.pokemon-sprite img {
-  width: 75px;
-  height: 75px;
-}
-
 .card-body a,
 .pokemon-types a,
 .pokemon-name-link {
