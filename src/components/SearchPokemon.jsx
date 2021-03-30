@@ -6,9 +6,7 @@ export const SearchPokemon = ({ setPokemon }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    pokemonData.getAllPokemon().then(pokemons => {
-      setPokemon(pokemons.filter(pkmn => pkmn.name.toLowerCase().includes(findPokemon.toLowerCase())));
-    });
+    pokemonData.getAllPokemon().then(pokemons => setPokemon(pokemons.filter(pkmn => pkmn.name.toLowerCase().includes(findPokemon.toLowerCase()))));
   }
 
   const handleChange = e => {

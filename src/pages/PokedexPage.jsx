@@ -40,7 +40,11 @@ export const PokedexPage = () => {
         </table>
         <SearchPokemon setPokemon={setPokemon} />
       </div>
-      <PokedexPagination fetchResult={fetchResult} setFetchResult={setFetchResult} setPokemon={setPokemon} />
+      {
+        pokemon.length >= 1
+        ? <PokedexPagination fetchResult={fetchResult} setFetchResult={setFetchResult} setPokemon={setPokemon} />
+        : null
+      }
     </div>
   )
 }
