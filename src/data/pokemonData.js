@@ -20,5 +20,65 @@ const getAllPokemon = () => {
   return allPokemon.then(res => res.data.results);
 }
 
+/* const getMonoTypeDamageRelations = type => {
+  const damageRelations = axios.get(`https://pokeapi.co/api/v2/type/${type}`);
+  return damageRelations.then(res => res.data.damage_relations);
+}
+
+const getDualTypeDamageRelations = (type1, type2) => {
+  let firstDamageRelations, secondDamageRelations = {};
+  const damagesSumatory = [];
+  let damageRelations = {};
+  const result1 = [];
+  const result2 = [];
+
+  axios.get(`https://pokeapi.co/api/v2/type/${type1}`).then(res => {
+    firstDamageRelations = res.data.damage_relations;
+  });
+
+  axios.get(`https://pokeapi.co/api/v2/type/${type2}`).then(res => {
+    secondDamageRelations = res.data.damage_relations;
+
+    // DOUBLE DAMAGE FROM----------------------------------
+    for (let i = 0; i < firstDamageRelations['double_damage_from'].length; i++) {
+      for (let j = 0; j < secondDamageRelations['double_damage_from'].length; j++) {
+        if (firstDamageRelations['double_damage_from'][i].name === secondDamageRelations['double_damage_from'][j].name) {
+          if (!result1.includes(firstDamageRelations['double_damage_from'][i].name)) {
+            result1.push(firstDamageRelations['double_damage_from'][i].name);
+            if (result2.includes(firstDamageRelations['double_damage_from'][i].name)) {
+              for (let j = 0; j < result2.length; j++) {
+                if (result2[j] === firstDamageRelations['double_damage_from'][i].name) {
+                  result2.splice(j, 1);
+                }
+              }
+            }
+          }
+        } else {
+          if (!result2.includes(firstDamageRelations['double_damage_from'][i].name) && !result1.includes(firstDamageRelations['double_damage_from'][i].name)) {
+            result2.push(firstDamageRelations['double_damage_from'][i].name);
+          }
+  
+          if (!result2.includes(secondDamageRelations['double_damage_from'][j].name) && !result1.includes(secondDamageRelations['double_damage_from'][j].name)) {
+            result2.push(secondDamageRelations['double_damage_from'][j].name);
+          }
+        }
+      }
+    }
+  
+    damageRelations = {
+      cuadruple_damage_from: result1,
+      double_damage_from: result2
+    }
+  
+    console.log(damageRelations);
+  });
+  return damagesSumatory;
+} */
+
+const getAbilityData = ability => {
+  const abilityResult = axios.get(`https://pokeapi.co/api/v2/ability/${ability}`);
+  return abilityResult.then(res => res.data);
+}
+
 // eslint-disable-next-line import/no-anonymous-default-export
-export default { getPokemons, getPokemonData, getAllPokemon, get200Pokemons };
+export default { getPokemons, getPokemonData, getAllPokemon, get200Pokemons, getAbilityData };

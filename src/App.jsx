@@ -3,7 +3,7 @@ import { AppFrame } from './components/AppFrame';
 import { WelcomePage } from './pages/WelcomePage';
 import { PokedexPage } from './pages/PokedexPage';
 import { PokemonPage } from './pages/PokemonPage';
-import { TypePage } from './pages/TypePage';
+import { TypesChart } from './pages/TypesChart';
 import { NotFoundPage } from './pages/NotFoundPage';
 import './App.css';
 
@@ -26,9 +26,9 @@ function App() {
             <PokemonPage />
           </AppFrame>
         </Route>
-        <Route path="/tipo">
+        <Route path="/tipos">
           <AppFrame>
-            <TypePage />
+            <TypesChart />
           </AppFrame>
         </Route>
         <Route>
