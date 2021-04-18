@@ -4,6 +4,7 @@ import { WelcomePage } from './pages/WelcomePage';
 import { PokedexPage } from './pages/PokedexPage';
 import { PokemonPage } from './pages/PokemonPage';
 import { TypesChart } from './pages/TypesChart';
+import { AbilitiesPage } from './pages/AbilitiesPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import './App.css';
 
@@ -29,6 +30,11 @@ function App() {
         <Route path="/tipos">
           <AppFrame>
             <TypesChart />
+          </AppFrame>
+        </Route>
+        <Route path="/habilidades">
+          <AppFrame>
+            <AbilitiesPage />
           </AppFrame>
         </Route>
         <Route>

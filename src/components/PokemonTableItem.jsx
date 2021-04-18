@@ -2,6 +2,7 @@ import pokemonData from '../data/pokemonData';
 import { useState, useEffect } from 'react';
 import typesTranslation from '../helpers';
 import { PokemonImage } from './PokemonImage';
+import { TypesFormatter } from './TypesFormatter';
 
 export const PokemonTableItem = ({ pokemon }) => {
   const [pokemonType, setPokemonType] = useState([]);
@@ -58,14 +59,7 @@ export const PokemonTableItem = ({ pokemon }) => {
         </td>
         <td className="pokemon-types">
           {
-            pokemonType[0]
-            ? <a href={'http://localhost:3000/tipos'}><span className={`type ${pokemonType[0]}`}>{pokemonType[0]}</span></a>
-            : ''
-          }
-          {
-            pokemonType[1]
-            ? <a href={'http://localhost:3000/tipos'}><span className={`type ${pokemonType[1]}`}>{pokemonType[1]}</span></a>
-            : ''
+            <TypesFormatter pokemonType={pokemonType} />
           }
         </td>
       </tr>

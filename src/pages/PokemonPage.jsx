@@ -4,6 +4,7 @@ import { PokemonImage } from '../components/PokemonImage';
 import typesTranslation from '../helpers';
 import { BaseStatsChart } from '../components/BaseStatsChart';
 import { PokemonAbility } from '../components/PokemonAbility';
+import { TypesFormatter } from '../components/TypesFormatter';
 
 export const PokemonPage = () => {
   const [pokemon, setPokemon] = useState([]);
@@ -46,14 +47,7 @@ export const PokemonPage = () => {
           <h2 className="text-capitalize">{pokemon.name}</h2>
           <div className="pokemon-types mt-4">
             {
-              pokemonType[0]
-              ? <a href={'http://localhost:3000/tipos'}><span className={`type ${pokemonType[0]}`}>{pokemonType[0]}</span></a>
-              : ''
-            }
-            {
-              pokemonType[1]
-              ? <a href={'http://localhost:3000/tipos'}><span className={`type ${pokemonType[1]}`}>{pokemonType[1]}</span></a>
-              : ''
+              <TypesFormatter pokemonType={pokemonType} />
             }
           </div>
         </div>

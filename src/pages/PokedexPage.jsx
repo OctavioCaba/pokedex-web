@@ -2,18 +2,33 @@ import { useState, useEffect } from 'react';
 import pokemonData from '../data/pokemonData';
 import { PokemonTableItem } from '../components/PokemonTableItem';
 import { SearchPokemon } from '../components/SearchPokemon';
-import { PokedexPagination } from '../components/PokedexPagination';
 
 export const PokedexPage = () => {
   const [pokemon, setPokemon] = useState([]);
-  const [fetchResult, setFetchResult] = useState([]);
+  const [scrollFlag, setScrollFlag] = useState(true);
+  let pokemonLimit = 20;
+
+  const fetchData = limit => pokemonData.getPokemons(limit).then(initialPokemons => setPokemon(initialPokemons));
 
   useEffect(() => {
-    pokemonData.get200Pokemons().then(initialPokemons => {
-      setPokemon(initialPokemons.results);
-      setFetchResult(initialPokemons);
-    });
+    fetchData(20);
   }, []);
+
+  useEffect(() => {
+    if (!scrollFlag) {
+      return;
+    }
+    
+    const infiniteScroll = () => {
+      if ((window.innerHeight + document.documentElement.scrollTop) === document.documentElement.offsetHeight) {
+        fetchData(pokemonLimit += 20);
+      }
+    }
+
+    window.addEventListener('scroll', infiniteScroll, false);
+
+    return () => window.removeEventListener('scroll', infiniteScroll, false);
+  }, [scrollFlag]);
 
   return (
     <div className="col-lg-10 my-0 mx-auto">
@@ -38,13 +53,8 @@ export const PokedexPage = () => {
             }
           </tbody>
         </table>
-        <SearchPokemon setPokemon={setPokemon} />
+        <SearchPokemon setPokemon={setPokemon} setScrollFlag={setScrollFlag} />
       </div>
-      {
-        pokemon.length >= 1
-        ? <PokedexPagination fetchResult={fetchResult} setFetchResult={setFetchResult} setPokemon={setPokemon} />
-        : null
-      }
     </div>
   )
 }
