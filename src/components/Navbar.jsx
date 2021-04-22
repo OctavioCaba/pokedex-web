@@ -9,7 +9,6 @@ export const Navbar = () => {
           <ul className="navbar-nav row text-center border-bottom" style={{width: '100%'}}>
             <a className="nav-item nav-link col-sm active" aria-current="page" href="/">Inicio</a>
             <a className="nav-item nav-link col-sm" aria-current="page" href="/pokedex">Pokédex</a>
-            <a className="nav-item nav-link col-sm" aria-current="page" href="/habilidades">Habilidades</a>
             <a className="nav-item nav-link col-sm" aria-current="page" href="/tipos">Tabla de Tipos</a>
             <a className="nav-item nav-link col-sm" aria-current="page" href="/">Items</a>
             <a className="nav-item nav-link col-sm" aria-current="page" href="/">Movimientos</a>
@@ -17,5 +16,5 @@ export const Navbar = () => {
         </div>
       </div>
     </nav>
-  )
+  );
 }

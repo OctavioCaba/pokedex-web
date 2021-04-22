@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import pokemonData from '../data/pokemonData';
 import { PokemonImage } from '../components/PokemonImage';
-import typesTranslation from '../helpers';
+import helpers from '../helpers';
 import { BaseStatsChart } from '../components/BaseStatsChart';
 import { PokemonAbility } from '../components/PokemonAbility';
 import { TypesFormatter } from '../components/TypesFormatter';
@@ -14,9 +14,9 @@ export const PokemonPage = () => {
   useEffect(() => {
     pokemonData.getPokemonData(window.location.pathname.substring(1)).then(pokemon => {
       setPokemon(pokemon);
-      const typesTranslated = pokemon.types.map(type => typesTranslation(type.type.name));
+      const typesTranslated = pokemon.types.map(type => helpers.typesTranslation(type.type.name));
       setPokemonType(typesTranslated);
-      console.log(pokemon.abilities);
+      //console.log(pokemon.abilities);
       setPokemonAbilities(pokemon.abilities);
       /* if (pokemonType.length === 2) {
         console.log('dualtype');
@@ -26,7 +26,7 @@ export const PokemonPage = () => {
         console.log('monotype');
         pokemonData.getMonoTypeDamageRelations(pokemon.types[0].type.name).then(res => console.log(res));
       } */
-    })
+    });
   }, []);
 
   return (
