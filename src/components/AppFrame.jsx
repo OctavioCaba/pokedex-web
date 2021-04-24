@@ -12,5 +12,5 @@ export const AppFrame = ({ children }) => {
         <small>&copy;2021</small>
       </footer>
     </div>
-  )
+  );
 }
