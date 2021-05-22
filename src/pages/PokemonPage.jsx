@@ -15,7 +15,7 @@ export const PokemonPage = () => {
       setPokemon(pokemon);
       const typesTranslated = pokemon.types.map(type => typesTranslation(type.type.name));
       setPokemonType(typesTranslated);
-      console.log(pokemon.abilities);
+      //console.log(pokemon.abilities);
       setPokemonAbilities(pokemon.abilities);
       /* if (pokemonType.length === 2) {
         console.log('dualtype');
