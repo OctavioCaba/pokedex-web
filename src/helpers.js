@@ -41,4 +41,28 @@ const typesTranslation = type => {
   }
 }
 
-export default typesTranslation;
+const generationsTranslation = generation => {
+  switch (generation) {
+    case 'generation-i':
+      return '1ra generación';
+    case 'generation-ii':
+      return '2da generación';
+    case 'generation-iii':
+      return '3ra generación';
+    case 'generation-iv':
+      return '4ta generación';
+    case 'generation-v':
+      return '5ta generación';
+    case 'generation-vi':
+      return '6ta generación';
+    case 'generation-vii':
+      return '7ma generación';
+    case 'generation-viii':
+      return '8va generación';
+    default:
+      break;
+  }
+}
+
+/* eslint import/no-anonymous-default-export: [2, {"allowObject": true}] */
+export default { typesTranslation, generationsTranslation };

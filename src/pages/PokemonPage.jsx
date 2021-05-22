@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import pokemonData from '../data/pokemonData';
 import { PokemonImage } from '../components/PokemonImage';
-import typesTranslation from '../helpers';
+import helpers from '../helpers';
 import { BaseStatsChart } from '../components/BaseStatsChart';
 import { PokemonAbility } from '../components/PokemonAbility';
+import { TypesFormatter } from '../components/TypesFormatter';
 
 export const PokemonPage = () => {
   const [pokemon, setPokemon] = useState([]);
@@ -13,7 +14,7 @@ export const PokemonPage = () => {
   useEffect(() => {
     pokemonData.getPokemonData(window.location.pathname.substring(1)).then(pokemon => {
       setPokemon(pokemon);
-      const typesTranslated = pokemon.types.map(type => typesTranslation(type.type.name));
+      const typesTranslated = pokemon.types.map(type => helpers.typesTranslation(type.type.name));
       setPokemonType(typesTranslated);
       //console.log(pokemon.abilities);
       setPokemonAbilities(pokemon.abilities);
@@ -25,7 +26,7 @@ export const PokemonPage = () => {
         console.log('monotype');
         pokemonData.getMonoTypeDamageRelations(pokemon.types[0].type.name).then(res => console.log(res));
       } */
-    })
+    });
   }, []);
 
   return (
@@ -46,14 +47,7 @@ export const PokemonPage = () => {
           <h2 className="text-capitalize">{pokemon.name}</h2>
           <div className="pokemon-types mt-4">
             {
-              pokemonType[0]
-              ? <a href={'http://localhost:3000/tipos'}><span className={`type ${pokemonType[0]}`}>{pokemonType[0]}</span></a>
-              : ''
-            }
-            {
-              pokemonType[1]
-              ? <a href={'http://localhost:3000/tipos'}><span className={`type ${pokemonType[1]}`}>{pokemonType[1]}</span></a>
-              : ''
+              <TypesFormatter pokemonType={pokemonType} />
             }
           </div>
         </div>

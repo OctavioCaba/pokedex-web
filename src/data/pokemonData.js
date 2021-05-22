@@ -1,23 +1,18 @@
 import axios from 'axios';
 
 const getPokemons = (limit = 12) => {
-  const pokes = axios.get(`https://pokeapi.co/api/v2/pokemon?limit=${limit}`);
-  return pokes.then(res => res.data.results);
-}
-
-const get200Pokemons = (link = 'https://pokeapi.co/api/v2/pokemon?limit=200&offset=0') => {
-  const pokes = axios.get(link);
-  return pokes.then(res => res.data);
+    const pokes = axios.get(`https://pokeapi.co/api/v2/pokemon?limit=${limit}`);
+    return pokes.then(res => res.data.results);
 }
 
 const getPokemonData = name => {
-  const pokeData = axios.get(`https://pokeapi.co/api/v2/${name}`);
-  return pokeData.then(res => res.data);
+    const pokeData = axios.get(`https://pokeapi.co/api/v2/${name}`);
+    return pokeData.then(res => res.data);
 }
 
 const getAllPokemon = () => {
-  const allPokemon = axios.get('https://pokeapi.co/api/v2/pokemon?limit=898');
-  return allPokemon.then(res => res.data.results);
+    const allPokemon = axios.get('https://pokeapi.co/api/v2/pokemon?limit=898');
+    return allPokemon.then(res => res.data.results);
 }
 
 /* const getMonoTypeDamageRelations = type => {
@@ -101,9 +96,9 @@ const getDualTypeDamageRelations = (type1, type2) => {
 } */
 
 const getAbilityData = ability => {
-  const abilityResult = axios.get(`https://pokeapi.co/api/v2/ability/${ability}`);
-  return abilityResult.then(res => res.data);
+    const abilityResult = axios.get(`https://pokeapi.co/api/v2/ability/${ability}`);
+    return abilityResult.then(res => res.data);
 }
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default { getPokemons, getPokemonData, getAllPokemon, get200Pokemons, getAbilityData };
+export default { getPokemons, getPokemonData, getAllPokemon, getAbilityData };

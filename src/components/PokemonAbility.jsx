@@ -20,11 +20,15 @@ export const PokemonAbility = ({ ability }) => {
             : 'Habilidad'
           }
         </th>
-        <td>{abilityData.names[5].name}</td>
+        <td>
+          <a className="pokemon-name-link" href={`http://localhost:3000/habilidad/${abilityData.name}`}>
+            {abilityData.names[5].name}
+          </a>
+        </td>
         <td>{abilityData.effect_entries[1].short_effect}</td>
       </tr>
     : <tr>
-        <td>one im not prouf of</td>
+        <td>No existen habilidades</td>
       </tr>
-  )
+  );
 }

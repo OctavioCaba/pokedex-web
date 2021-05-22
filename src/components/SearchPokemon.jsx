@@ -1,12 +1,18 @@
 import { useState } from 'react';
 import pokemonData from '../data/pokemonData';
 
-export const SearchPokemon = ({ setPokemon }) => {
+export const SearchPokemon = ({ setPokemon, setScrollFlag }) => {
   const [findPokemon, setFindPokemon] = useState('');
 
   const handleSubmit = e => {
     e.preventDefault();
-    pokemonData.getAllPokemon().then(pokemons => setPokemon(pokemons.filter(pkmn => pkmn.name.toLowerCase().includes(findPokemon.toLowerCase()))));
+    if (findPokemon === '') {
+      pokemonData.getPokemons(20).then(initialPokemons => setPokemon(initialPokemons));
+      setScrollFlag(true);
+    } else {
+      pokemonData.getAllPokemon().then(pokemons => setPokemon(pokemons.filter(pkmn => pkmn.name.toLowerCase().includes(findPokemon.toLowerCase()))));
+      setScrollFlag(false);
+    }
   }
 
   const handleChange = e => {
