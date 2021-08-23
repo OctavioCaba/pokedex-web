@@ -1,18 +1,18 @@
 import axios from 'axios';
 
 const getPokemons = (limit = 12) => {
-    const pokes = axios.get(`https://pokeapi.co/api/v2/pokemon?limit=${limit}`);
-    return pokes.then(res => res.data.results);
+  const pokes = axios.get(`https://pokeapi.co/api/v2/pokemon?limit=${limit}`);
+  return pokes.then(res => res.data.results);
 }
 
 const getPokemonData = name => {
-    const pokeData = axios.get(`https://pokeapi.co/api/v2/${name}`);
-    return pokeData.then(res => res.data);
+  const pokeData = axios.get(`https://pokeapi.co/api/v2/${name}`);
+  return pokeData.then(res => res.data);
 }
 
 const getAllPokemon = () => {
-    const allPokemon = axios.get('https://pokeapi.co/api/v2/pokemon?limit=898');
-    return allPokemon.then(res => res.data.results);
+  const allPokemon = axios.get('https://pokeapi.co/api/v2/pokemon?limit=898');
+  return allPokemon.then(res => res.data.results);
 }
 
 /* const getMonoTypeDamageRelations = type => {
@@ -96,9 +96,31 @@ const getDualTypeDamageRelations = (type1, type2) => {
 } */
 
 const getAbilityData = ability => {
-    const abilityResult = axios.get(`https://pokeapi.co/api/v2/ability/${ability}`);
-    return abilityResult.then(res => res.data);
+  const abilityResult = axios.get(`https://pokeapi.co/api/v2/ability/${ability}`);
+  return abilityResult.then(res => res.data);
+}
+
+const getPokemonEvolutionChain = url => {
+  let evolutionChain = [];
+  let evolutionChainUrl;
+
+  axios.get(url).then(res => {
+    evolutionChainUrl =  res.data.evolution_chain.url;
+
+    axios.get(evolutionChainUrl).then(results => {
+      evolutionChain.push({name: results.data.chain.species.name});
+
+      results.data.chain.evolves_to.forEach(evols => {
+        evolutionChain.push({name: evols.species.name});
+
+        evols.evolves_to.forEach(evolutions => evolutionChain.push({name: evolutions.species.name}));
+      });
+
+    });
+  });
+
+  return evolutionChain;
 }
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default { getPokemons, getPokemonData, getAllPokemon, getAbilityData };
+export default { getPokemons, getPokemonData, getAllPokemon, getAbilityData, getPokemonEvolutionChain };

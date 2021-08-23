@@ -25,39 +25,44 @@ export const AbilityPage = () => {
     <div>
       <h1>{abilityName}</h1>
       <div className="container-lg mt-4">
-        <table className="table table-bordered pokemon-table">
-          <thead>
-            <tr>
-              <th>Descripción</th>
-              <th>Primera aparición</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{abilityDescription}</td>
-              <td>{abilityGeneration}</td>
-            </tr>
-          </tbody>
-        </table>
-        <table className="table table-bordered pokemon-table">
-          <thead>
-            <tr>
-              <td>Lista de Pokémons que poseen "<strong>{abilityName}</strong>"</td>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              ability.pokemon.map(poke => {
-                /* <tr>
-                    <td>
-                      <a href={`http://localhost:3000/pokemon/${ability.pokemon[0].pokemon.name}`}>{ability.pokemon !== undefined ? ability.pokemon[0].pokemon.name : ''}</a>
-                    </td>
-                  </tr> */
-                  //CREAR COMPONENTE
-              })
-            }
-          </tbody>
-        </table>
+        <div className="d-flex flex-md-row flex-column">
+          <table className="table table-bordered pokemon-table" style={{ maxHeight: '50px' }}>
+            <thead>
+              <tr>
+                <th>Descripción</th>
+                <th>Primera aparición</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{abilityDescription}</td>
+                <td>{abilityGeneration}</td>
+              </tr>
+            </tbody>
+          </table>
+          <table className="table pokemon-table">
+            <thead>
+              <tr>
+                <td>Lista de Pokémons que poseen "<strong>{abilityName}</strong>"</td>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                ability.pokemon !== undefined
+                ? ability.pokemon.map(poke => {
+                    return (
+                      <tr>
+                        <td>
+                          <a href={`http://localhost:3000/pokemon/${poke.pokemon.name}`} style={{ textTransform: 'capitalize' }} className="pokemon-name-link">{poke.pokemon.name}</a>
+                        </td>
+                      </tr>
+                    );
+                  })
+                : null
+              }
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );

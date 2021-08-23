@@ -5,6 +5,7 @@ import helpers from '../helpers';
 import { BaseStatsChart } from '../components/BaseStatsChart';
 import { PokemonAbility } from '../components/PokemonAbility';
 import { TypesFormatter } from '../components/TypesFormatter';
+import { PokemonEvolutionFamilyTable } from '../components/PokemonEvolutionFamilyTable';
 
 export const PokemonPage = () => {
   const [pokemon, setPokemon] = useState([]);
@@ -16,7 +17,7 @@ export const PokemonPage = () => {
       setPokemon(pokemon);
       const typesTranslated = pokemon.types.map(type => helpers.typesTranslation(type.type.name));
       setPokemonType(typesTranslated);
-      //console.log(pokemon.abilities);
+      /* console.log(pokemon.species.url); */
       setPokemonAbilities(pokemon.abilities);
       /* if (pokemonType.length === 2) {
         console.log('dualtype');
@@ -58,24 +59,34 @@ export const PokemonPage = () => {
           </div>
         </div>
       </div> {/* GRID */}
-      <div className="jumbotron mt-4">
-        <h4>Habilidades</h4>
-        <table className="table table-bordered pokemon-table">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Nombre</th>
-              <th>Descripción <small className="text-muted">(inglés)</small></th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              pokemonAbilities[0]
-              ? pokemonAbilities.map((ability, i) => <PokemonAbility key={i} ability={ability} />)
-              : null
-            }
-          </tbody>
-        </table>
+      <div className="mt-4 row">
+        <div className="col-md-8 col-sm-12">
+          <h4>Habilidades</h4>
+          <table className="table table-bordered pokemon-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Descripción <small className="text-muted">(inglés)</small></th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                pokemonAbilities[0]
+                ? pokemonAbilities.map((ability, i) => <PokemonAbility key={i} ability={ability} />)
+                : null
+              }
+            </tbody>
+          </table>
+        </div>
+        <div className="col-md-4 col-sm-12">
+          <h4>Familia evolutiva</h4>
+          {
+            pokemon.species
+            ? <PokemonEvolutionFamilyTable speciesLink={pokemon.species.url} />
+            : null
+          }
+        </div>
       </div>
     </div>
   )
